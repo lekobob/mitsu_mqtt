@@ -131,7 +131,6 @@ class MqttClimate(ClimateDevice):
     def current_temperature(self):
         """Return the temperature we try to reach."""
         return self._current_temperature
-    
 
     @property
     def current_fan_mode(self):
@@ -158,7 +157,7 @@ class MqttClimate(ClimateDevice):
 
     @property
     def current_swing_mode(self):
-        """Return the fan setting."""
+        """Return the swing setting."""
         return self._current_swing_mode
 
     @property
@@ -175,7 +174,7 @@ class MqttClimate(ClimateDevice):
         self.update_ha_state()
 
     def set_fan_mode(self, fan):
-        """Set new target temperature."""
+        """Set new fan mode."""
         if fan is not None:
             self._current_fan_mode = fan
             payload = '{"fan":"' + self._current_fan_mode + '"}'
@@ -184,7 +183,7 @@ class MqttClimate(ClimateDevice):
             self.schedule_update_ha_state()
 
     def set_operation_mode(self, operation_mode):
-        """Set new target temperature."""
+        """Set new operating mode."""
         self._current_operation = operation_mode
         if self._current_operation == "OFF":
             payload = '{"power":"OFF"}'
@@ -197,7 +196,7 @@ class MqttClimate(ClimateDevice):
         self.schedule_update_ha_state()
 
     def set_swing_mode(self, swing):
-        """Set new target temperature."""
+        """Set new swing mode."""
         if swing is not None:
             self._current_swing_mode = swing
             payload = '{"vane":"' + self._current_swing_mode + '"}'
