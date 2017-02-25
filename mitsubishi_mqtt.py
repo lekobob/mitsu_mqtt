@@ -1,8 +1,8 @@
 """
-Support for MQTT heaters.
+Support for Mitsubishi heatpumps using https://github.com/SwiCago/HeatPump over MQTT.
 
 For more details about this platform, please refer to the documentation at
-https://home-assistant.io/components/switch.mqtt/
+https://github.com/lekobob/mitsu_mqtt
 """
 import logging
 
@@ -52,11 +52,11 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
 
 
 class MqttClimate(ClimateDevice):
-    """Representation of a heater that can be toggled using MQTT."""
+    """Representation of a Mistsubishi Minisplit Heatpump controlled over MQTT."""
 
 
     def __init__(self, hass, name, state_topic, temperature_state_topic, command_topic, qos, retain):
-        """Initialize the MQTT switch."""
+        """Initialize the MQTT Heatpump."""
         self._state = False
         self._hass = hass
         self._name = name
@@ -118,10 +118,7 @@ class MqttClimate(ClimateDevice):
         return TEMP_CELSIUS
 
 
-    # we need the target_temperature property not to
-    # be None or we won't be able to use the slider widget in the web interface
-    # This is not very convenient because it may be None initially, or unknown, especially
-    # in "optimistic" settings.
+
     @property
     def target_temperature(self):
         """Return the temperature we try to reach."""
